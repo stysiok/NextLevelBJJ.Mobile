@@ -1,28 +1,65 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image } from 'react-native';
+import * as Expo from "expo";
+import { StyleSheet, View, Image } from 'react-native';
+import { Button, Text, Body } from 'native-base';
+import { StackNavigator } from 'react-navigation';
 
 export default class Welcome extends React.Component{
+    constructor() {
+        super();
+        this.state = {
+            isReady: false
+        };
+    }
+    componentWillMount() {
+        this.loadFonts();
+    }
+    async loadFonts() {
+        await Expo.Font.loadAsync({
+            Roboto: require("native-base/Fonts/Roboto.ttf"),
+            Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
+            Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf")
+        });
+        this.setState({
+            isReady: true
+        });
+    }
+    
     render(){
-        return (
-            <View style={styles.view}>
-            <Image style={styles.backgroundImage} source={require('../img/welcomeBg.jpg')}/>
-            <View style={styles.overlay} />
-            <Image style={styles.logo} source={require('../img/nextLevelLogo.png')}/>
-            <Text style={styles.header}>
-                {'Oss Jujiterio!'.toUpperCase()}
-            </Text>
-            <Text style={styles.text}>
-                Witaj w mobilnej aplikacji klubu Next Level Opole. W tym miejscu sprawdzisz swój karnet, zapiszesz się na zawody i dowiesz się co słychać w klubie.
-            </Text>
-            <Button title="Wczytaj karnet" style={styles.button}/>
-         </View>
-        );
+        if(this.state.isReady){
+            return (
+                <View style={styles.view}>
+                    <Image style={styles.backgroundImage} source={require('../img/welcomeBg.jpg')}/>
+                    <View style={styles.overlay} />
+                    <Image style={styles.logo} source={require('../img/nextLevelLogo.png')}/>
+                    <Text style={styles.header}>
+                        {'Oss Jujiterio!'.toUpperCase()}
+                    </Text>
+                    <Text style={styles.text}>
+                        Witaj w mobilnej aplikacji klubu Next Level Opole. W tym miejscu sprawdzisz swój karnet, zapiszesz się na zawody i dowiesz się co słychać w klubie.
+                    </Text>
+                    <Body style={styles.body}>
+                        <Button primary rounded large style={styles.button} onPress={() => {this.props.navigation.navigate('Scanner')}}>
+                            <Text>{' wczytaj karnet '.toUpperCase()}</Text>
+                        </Button>
+                    </Body>
+                </View>
+            );
+        }else{
+            return(
+                <View>
+                    <Text>W8</Text>
+                </View>
+            );
+        }
     }
 }
 
 const styles = StyleSheet.create({
     view: {
-        flex: 1
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     backgroundImage: {
         flex: 1,
@@ -34,32 +71,33 @@ const styles = StyleSheet.create({
     },
     logo: {
         alignSelf: 'center',
-        width: 200,
-        height: 200,
-        marginVertical: 10
+        width: '65%',
+        height: '65%',
+        flex: 4
     },
     overlay: {
         ...StyleSheet.absoluteFillObject,
         backgroundColor: 'rgba(0, 0, 0, 0.75)'
     },
     header: {
+        flex: 1,
         backgroundColor: 'transparent',
         textAlign: 'center',
         color: '#ffffff',
         fontSize: 40,
-        marginVertical: 20
+        fontWeight: 'bold'
     },
     text: {
         backgroundColor: 'transparent',
         textAlign: 'center',
         color: '#ffffff',
         fontSize: 20,
-        marginRight: 25,
-        marginLeft: 25,
-        marginTop: 10,
-        marginBottom: 75
+        flex: 2,
+        width: '80%'
     },
-    button: {
-        
+    body: {
+        flex: 4,
+        justifyContent: 'center',
+        alignItems: 'center'
     }    
 });

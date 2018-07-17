@@ -2,7 +2,6 @@ import React from 'react';
 import * as Expo from "expo";
 import { StyleSheet, View, Image } from 'react-native';
 import { Button, Text, Body } from 'native-base';
-import { StackNavigator } from 'react-navigation';
 
 export default class Welcome extends React.Component{
     constructor() {

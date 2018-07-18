@@ -8,13 +8,10 @@ import {
     Button,
     H1 } from 'native-base';
 import { Image } from 'react-native';
+import { withNavigation } from 'react-navigation';
 
-export default class News extends React.Component {
-    constructor(){
-        super();
-    }
-    
-    render() {
+class News extends React.Component {
+    render(){
         return (
             <Content>
                 <Card>
@@ -24,13 +21,15 @@ export default class News extends React.Component {
                     <CardItem>
                         <Left>
                             <H1>
-                                {this.props.post.title}
+                                {this.props.post.title} + {this.props.post.postId}
                             </H1>
                         </Left>
                     </CardItem>   
                     <CardItem>
                         <Left>
-                            <Button transparent primary>
+                            <Button transparent primary onPress={() => this.props.navigation.navigate('ReadNews', {
+                                postId: this.props.post.postId
+                            })}>
                                 <Text>
                                     Czytaj...
                                 </Text>
@@ -42,3 +41,5 @@ export default class News extends React.Component {
         );
     }
 }
+
+export default withNavigation(News);

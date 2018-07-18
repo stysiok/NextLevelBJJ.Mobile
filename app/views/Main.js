@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, ActivityIndicator, View, Text } from 'react-native';
+import { FlatList, ActivityIndicator, View } from 'react-native';
 import { Container } from 'native-base';
 import News from '../components/News';
 

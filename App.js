@@ -2,6 +2,7 @@ import React from 'react';
 import Welcome from './app/views/Welcome';
 import CodeScanner from './app/views/CodeScanner';
 import Main from './app/views/Main';
+import ReadNews from './app/views/ReadNews';
 import { createStackNavigator } from 'react-navigation';
 
 export default class App extends React.Component {
@@ -27,6 +28,9 @@ const RootStack = createStackNavigator(
     },
     MainScreen: {
       screen: Main
+    },
+    ReadNews: {
+      screen: ReadNews
     }
   },
   {

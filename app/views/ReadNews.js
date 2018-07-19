@@ -6,7 +6,9 @@ import {
     Card, 
     CardItem, 
     Left,
-    H1 } from 'native-base';
+    H1,
+    Text,
+    Right } from 'native-base';
 
 export default class News extends React.Component {
     constructor(){
@@ -59,14 +61,21 @@ export default class News extends React.Component {
                             <CardItem>
                                 <Left>
                                     <H1>
-                                        asdasdasd
+                                        {this.state.post.title}
                                     </H1>
                                 </Left>
                             </CardItem>
                             <CardItem>
                                 <Left>
-                                    asdasdas
+                                    <Text>
+                                        {this.state.post.text}
+                                    </Text>
                                 </Left>
+                                <Right>
+                                    <Text note>
+                                        {this.state.post.date}
+                                    </Text>
+                                </Right>
                             </CardItem>
                         </Card>
                     </Content>

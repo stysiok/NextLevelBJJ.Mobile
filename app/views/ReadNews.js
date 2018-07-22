@@ -7,8 +7,8 @@ import {
     CardItem, 
     Left,
     H1,
-    Text,
-    Right } from 'native-base';
+    Text } from 'native-base';
+import moment from 'moment';
 
 export default class News extends React.Component {
     constructor(){
@@ -20,8 +20,7 @@ export default class News extends React.Component {
 
     async componentDidMount(){
         try {
-            let query = `query { post( postGuid: "${this.props.navigation.getParam('postId')}" ) { postId title text creationDate }}`;
-            console.log(query);
+            let query = `query { post( postGuid: "${this.props.navigation.getParam('postId')}" ) { postId title text creationDate author image }}`;
             let response = await fetch('http://192.168.1.109:5000/graphql/', {
                 method: 'POST',
                 headers: {
@@ -33,7 +32,6 @@ export default class News extends React.Component {
             });
             
             let responseJson = await response.json();
-            console.log(responseJson);
             this.setState({
                 isLoading: false,
                 post: responseJson.data.post
@@ -52,11 +50,12 @@ export default class News extends React.Component {
             );
         }else{
             return(
+                
                 <Container>
                     <Content>
                         <Card>
                             <CardItem cardBody>
-                                <Image source={{uri: 'http://placekitten.com/200/300'}} style={{height: 200, width: null, flex: 1}} />
+                                <Image source={{uri: this.state.post.image }} style={{height: 200, width: null, flex: 1}} />
                             </CardItem>
                             <CardItem>
                                 <Left>
@@ -71,11 +70,11 @@ export default class News extends React.Component {
                                         {this.state.post.text}
                                     </Text>
                                 </Left>
-                                <Right>
-                                    <Text note>
-                                        {this.state.post.date}
-                                    </Text>
-                                </Right>
+                            </CardItem>
+                            <CardItem>
+                                <Text note>
+                                    Napisane przez {this.state.post.author} dnia {moment(this.state.post.date).format('DD.MM.YYYY')}
+                                </Text>
                             </CardItem>
                         </Card>
                     </Content>

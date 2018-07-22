@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Welcome from './app/views/Welcome';
 import CodeScanner from './app/views/CodeScanner';
 import Main from './app/views/Main';
@@ -11,7 +12,9 @@ export default class App extends React.Component {
   }
   
   render() {
-    return <RootStack />;
+    return (
+      <RootStack />
+    );
   }
 }
 
@@ -34,6 +37,13 @@ const RootStack = createStackNavigator(
     }
   },
   {
-    initalRouteName: 'Home'
+    initalRouteName: 'Home',
+    navigationOptions: {
+      title: "Next Level BJJ",
+      headerStyle: {
+        backgroundColor: '#48BCEC'
+      },
+      headerTintColor: '#fff'
+    },
   }
 );

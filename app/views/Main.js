@@ -19,7 +19,7 @@ export default class Main extends React.Component {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                     query: 'query { posts { postId title }}'
+                     query: 'query { posts { postId title image }}'
                 })
             });
             

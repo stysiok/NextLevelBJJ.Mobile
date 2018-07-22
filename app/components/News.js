@@ -16,12 +16,12 @@ class News extends React.Component {
             <Content>
                 <Card>
                     <CardItem cardBody>
-                        <Image source={{uri: 'http://placekitten.com/200/300'}} style={{height: 200, width: null, flex: 1}} />
+                        <Image source={{uri: this.props.post.image}} style={{height: 200, width: null, flex: 1}} />
                     </CardItem>
                     <CardItem>
                         <Left>
                             <H1>
-                                {this.props.post.title} + {this.props.post.postId}
+                                {this.props.post.title}
                             </H1>
                         </Left>
                     </CardItem>   

@@ -4,7 +4,11 @@ import Welcome from './app/views/Welcome';
 import CodeScanner from './app/views/CodeScanner';
 import Main from './app/views/Main';
 import ReadNews from './app/views/ReadNews';
-import { createStackNavigator } from 'react-navigation';
+
+import Carnet from './app/views/Carnet';
+import Competitions from './app/views/Competitions';
+
+import { createStackNavigator, createDrawerNavigator } from 'react-navigation';
 
 export default class App extends React.Component {
   constructor() {
@@ -30,7 +34,7 @@ const RootStack = createStackNavigator(
       screen: CodeScanner
     },
     MainScreen: {
-      screen: Main
+      screen: Main  
     },
     ReadNews: {
       screen: ReadNews
@@ -47,3 +51,18 @@ const RootStack = createStackNavigator(
     },
   }
 );
+
+const drawerNav = createDrawerNavigator({
+  Home: {
+    screen: Main
+  },
+  Carnet: {
+    screen: Carnet
+  },
+  Competitions: {
+    screen: Competitions
+  }
+}, {
+  drawerPosition: 'left',
+  initialRouteName: 'Home'
+});

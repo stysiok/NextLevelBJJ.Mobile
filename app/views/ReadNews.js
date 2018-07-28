@@ -9,6 +9,7 @@ import {
     H1,
     Text } from 'native-base';
 import moment from 'moment';
+import { GraphQLFetch } from '../modules/NextLevelFetch.js';
 
 export default class News extends React.Component {
     constructor(){
@@ -19,26 +20,13 @@ export default class News extends React.Component {
     }
 
     async componentDidMount(){
-        try {
-            let query = `query { post( postGuid: "${this.props.navigation.getParam('postId')}" ) { postId title text creationDate author image }}`;
-            let response = await fetch('http://192.168.1.109:5000/graphql/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                     query: query
-                })
-            });
-            
-            let responseJson = await response.json();
-            this.setState({
-                isLoading: false,
-                post: responseJson.data.post
-            });
-        } catch (error) {
-            console.log(error);
-        }
+        let query = `query { post( postGuid: "${this.props.navigation.getParam('postId')}" ) { postId title text creationDate author image }}`;
+        let json = await GraphQLFetch(query);
+        
+        this.setState({
+            isLoading: false,
+            post: json.data.post
+        });
     }
     
     render() {

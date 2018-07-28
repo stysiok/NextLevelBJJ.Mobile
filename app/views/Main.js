@@ -2,6 +2,7 @@ import React from 'react';
 import { FlatList, ActivityIndicator, View } from 'react-native';
 import { Container } from 'native-base';
 import News from '../components/News';
+import { GraphQLFetch } from '../modules/NextLevelFetch.js';
 
 export default class Main extends React.Component { 
     constructor(){
@@ -12,26 +13,13 @@ export default class Main extends React.Component {
     }
 
     async componentDidMount(){
-        try {
-            let response = await fetch('http://192.168.1.109:5000/graphql/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                     query: 'query { posts { postId title image }}'
-                })
-            });
-            
-            let responseJson = await response.json();
-            
-            this.setState({
-                isLoading: false,
-                dataSource: responseJson.data.posts
-            });
-        } catch (error) {
-            console.log(error);
-        }
+        let query = 'query { posts { postId title image }}';
+        let json = await GraphQLFetch(query);
+        
+        this.setState({
+            isLoading: false,
+            dataSource: json.data.posts
+        });
     }
 
     render(){

@@ -22,6 +22,75 @@ export default class App extends React.Component {
   }
 }
 
+const NewsStack = createStackNavigator(
+  {
+    AllNews: {
+      screen: Main
+    },
+    ReadNews: {
+      screen: ReadNews
+    }
+  },
+  {
+    initalRouteName: 'AllNews',
+    headerMode: 'none'
+    // navigationOptions: {
+    //   title: "Next Level BJJ",
+    //   headerStyle: {
+    //     backgroundColor: '#48BCEC'
+    //   },
+    //   headerTintColor: '#fff'
+    // },
+  }
+);
+
+const CarnetStack = createStackNavigator(
+  {
+    Carnet: {
+      screen: Carnet
+    },
+  },
+  {
+    initalRouteName: 'Carnet',
+    headerMode: 'none'
+    // navigationOptions: {
+    //   title: "Next Level BJJ",
+    //   headerStyle: {
+    //     backgroundColor: '#48BCEC'
+    //   },
+    //   headerTintColor: '#fff'
+    // },
+  }
+);
+
+const CompetitionsStack = createStackNavigator(
+  {
+    Competitions: {
+      screen: Competitions
+    }
+  },
+  {
+    initalRouteName: 'Competitions',
+    headerMode: 'none'
+    
+  }
+);
+
+const Drawer = createDrawerNavigator({
+  News: {
+    screen: NewsStack
+  },
+  Carnet: {
+    screen: CarnetStack
+  },
+  Competitions: {
+    screen: CompetitionsStack
+  }
+}, {
+  initialRouteName: 'News',
+  headerMode: 'none'
+});
+
 const RootStack = createStackNavigator(
   {
     Home: {
@@ -33,11 +102,8 @@ const RootStack = createStackNavigator(
     Scanner: {
       screen: CodeScanner
     },
-    MainScreen: {
-      screen: Main  
-    },
-    ReadNews: {
-      screen: ReadNews
+    Drawer: {
+      screen: Drawer
     }
   },
   {
@@ -51,18 +117,3 @@ const RootStack = createStackNavigator(
     },
   }
 );
-
-const drawerNav = createDrawerNavigator({
-  Home: {
-    screen: Main
-  },
-  Carnet: {
-    screen: Carnet
-  },
-  Competitions: {
-    screen: Competitions
-  }
-}, {
-  drawerPosition: 'left',
-  initialRouteName: 'Home'
-});

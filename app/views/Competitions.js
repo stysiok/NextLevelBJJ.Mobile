@@ -2,9 +2,6 @@ import React from 'react';
 import { Container, Content, Text } from 'native-base';
 
 export default class Competitions extends React.Component{
-    static navigationOptions = {
-        drawerLabel: 'Zawody'
-    }
     render(){
         return(
             <Container>
@@ -12,6 +9,9 @@ export default class Competitions extends React.Component{
                     <Text>
                         Competitions screen
                     </Text>
+                    <Button onPress={() => this.props.navigation.navigate('Competition')}>
+                        <Text>Click</Text>
+                    </Button>
                 </Content>
             </Container>
         );

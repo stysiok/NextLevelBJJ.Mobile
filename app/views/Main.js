@@ -1,25 +1,13 @@
 import React from 'react';
-import { FlatList, ActivityIndicator, View } from 'react-native';
-import { Container, Button, Icon } from 'native-base';
-import News from '../components/News';
-import { GraphQLFetch } from '../modules/NextLevelFetch.js';
+import { ActivityIndicator, View, StyleSheet } from 'react-native';
+import { Container, Button, Text, Content, Icon } from 'native-base';
 
 export default class Main extends React.Component { 
     constructor(){
         super();
         this.state = {
-            isLoading: true
+            isLoading: false
         };
-    }
-
-    async componentDidMount(){
-        let query = 'query { posts { postId title image }}';
-        let json = await GraphQLFetch(query);
-        
-        this.setState({
-            isLoading: false,
-            dataSource: json.data.posts
-        });
     }
 
     render(){
@@ -32,17 +20,47 @@ export default class Main extends React.Component {
         } else { 
             return (
                 <Container>
-                    <FlatList 
-                        data={this.state.dataSource}
-                        renderItem={({item}) => {
-                            return (
-                                <News post={item} />
-                            );
-                        }}
-                        keyExtractor={(item, index) => item.postId}
-                    />                
+                    <Content>
+                        <Button large onPress={() => this.props.navigation.navigate('Carnet')}>
+                            <Icon name='md-briefcase' />
+                            <Text>
+                                Mój karnet
+                            </Text>
+                        </Button>
+                        <Button large onPress={() => this.props.navigation.navigate('PriceList')}>
+                            <Icon name='md-pricetag' />
+                            <Text>
+                                Cennik
+                            </Text>
+                        </Button>
+                        <Button large onPress={() => this.props.navigation.navigate('Schedule')}>
+                            <Icon name='calendar' />
+                            <Text>
+                                Grafik
+                            </Text>
+                        </Button>              
+                        <Button large onPress={() => this.props.navigation.navigate('Competitions')}>
+                            <Icon name='md-medkit' />
+                            <Text>
+                                Zawody
+                            </Text>
+                        </Button>
+                    </Content>
                 </Container>
             );
         }
     }
 }
+
+const styles = StyleSheet.create({
+    cont: {
+        flex: 1,
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        
+    },
+    btn: {
+        flex: 1,
+        justifyContent: 'center'
+    }
+});

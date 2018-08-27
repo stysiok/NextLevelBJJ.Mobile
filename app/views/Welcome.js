@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Expo from "expo";
-import { StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, View, Image, ActivityIndicator } from 'react-native';
 import { Button, Text, Body } from 'native-base';
 
 export default class Welcome extends React.Component{
@@ -46,8 +46,8 @@ export default class Welcome extends React.Component{
             );
         }else{
             return(
-                <View>
-                    <Text>W8</Text>
+                <View style={{flex: 1, padding: 20}}>
+                    <ActivityIndicator />
                 </View>
             );
         }

@@ -3,12 +3,14 @@ import React from 'react';
 import Welcome from './app/views/Welcome';
 import CodeScanner from './app/views/CodeScanner';
 import Main from './app/views/Main';
-import ReadNews from './app/views/ReadNews';
-
 import Carnet from './app/views/Carnet';
 import Competitions from './app/views/Competitions';
+import MyHistory from './app/views/History';
+import Schedule from './app/views/Schedule';
+import PriceList from './app/views/PriceList';
 
-import { createStackNavigator, createDrawerNavigator } from 'react-navigation';
+
+import { createStackNavigator } from 'react-navigation';
 
 export default class App extends React.Component {
   constructor() {
@@ -22,75 +24,6 @@ export default class App extends React.Component {
   }
 }
 
-const NewsStack = createStackNavigator(
-  {
-    AllNews: {
-      screen: Main
-    },
-    ReadNews: {
-      screen: ReadNews
-    }
-  },
-  {
-    initalRouteName: 'AllNews',
-    headerMode: 'none'
-    // navigationOptions: {
-    //   title: "Next Level BJJ",
-    //   headerStyle: {
-    //     backgroundColor: '#48BCEC'
-    //   },
-    //   headerTintColor: '#fff'
-    // },
-  }
-);
-
-const CarnetStack = createStackNavigator(
-  {
-    Carnet: {
-      screen: Carnet
-    },
-  },
-  {
-    initalRouteName: 'Carnet',
-    headerMode: 'none'
-    // navigationOptions: {
-    //   title: "Next Level BJJ",
-    //   headerStyle: {
-    //     backgroundColor: '#48BCEC'
-    //   },
-    //   headerTintColor: '#fff'
-    // },
-  }
-);
-
-const CompetitionsStack = createStackNavigator(
-  {
-    Competitions: {
-      screen: Competitions
-    }
-  },
-  {
-    initalRouteName: 'Competitions',
-    headerMode: 'none'
-    
-  }
-);
-
-const Drawer = createDrawerNavigator({
-  News: {
-    screen: NewsStack
-  },
-  Carnet: {
-    screen: CarnetStack
-  },
-  Competitions: {
-    screen: CompetitionsStack
-  }
-}, {
-  initialRouteName: 'News',
-  headerMode: 'none'
-});
-
 const RootStack = createStackNavigator(
   {
     Home: {
@@ -102,18 +35,26 @@ const RootStack = createStackNavigator(
     Scanner: {
       screen: CodeScanner
     },
-    Drawer: {
-      screen: Drawer
+    Main: {
+      screen: Main
+    },
+    Carnet: {
+      screen: Carnet
+    },
+    Schedule: {
+      screen: Schedule
+    },
+    History: {
+      screen: MyHistory
+    },
+    Competitions: {
+      screen: Competitions
+    },
+    PriceList:{
+      screen: PriceList
     }
   },
   {
-    initalRouteName: 'Home',
-    navigationOptions: {
-      title: "Next Level BJJ",
-      headerStyle: {
-        backgroundColor: '#48BCEC'
-      },
-      headerTintColor: '#fff'
-    },
+    initalRouteName: 'Home'
   }
 );
